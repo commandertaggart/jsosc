@@ -1,0 +1,4 @@
+node_modules
+node-webkit.app
+.DS_Store
+npm-debug.log

@@ -1,0 +1,7 @@
+{
+	"name": "jsosc-nw-debugging",
+	"main": "index.html",
+	"window": {
+		"toolbar": true
+	}
+}

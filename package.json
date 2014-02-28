@@ -1,0 +1,21 @@
+{
+	"name": "jsosc",
+	"version": "0.1.0",
+	"description": "A JavaScript implementation of the OSC transport for Node.js and WebSocket-capable browsers",
+	"homepage": "http://abject-entertainment.com/projects/jsosc",
+	"author": "info@abject-entertainment.com",
+
+	"main": "jsosc",
+	"modules":
+		{ "jsosc": "lib/jsosc"
+//		, "OSCServer": "lib/OSCServer"
+//		, "OSCClient": "lib/OSCClient"
+//		, "OSCMessage": "lib/OSCMessage"
+		},
+
+	"dependencies":
+		{ "ws": "glikker/ws"
+		, "requirejs": "2.1.x"
+		, "buster": "0.7.x"
+		}
+}
