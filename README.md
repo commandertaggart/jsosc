@@ -119,3 +119,8 @@ The configuration object provided to the OSCClient object includes these members
 * `keepalive` - An optional number specifying how often (in milliseconds) to send a '/ping' message.
 * `namespaces` - An array of OSC address prefixes to connect to (see `sendConnectMessage`).
 * `sendConnectMessage` - an optional boolean value, defaulting to `false`.  As an extension to the basic OSC specification, this library allows sharing of a single connection pipe between users of multiple OSC message streams by differentiating those streams based on the first part of the OSC address, and those interested in these address spaces.  If set to `true`, the client will automatically send an `'/@connect'` message to each address prefix specified in `namespaces`.  For example, if `namespaces` is `['/a','/b/0']`, then the client will automatically send these messages upon connecting to the server: `'/a/@connect', '/b/0/@connect'`.  These messages are most likely meaningless to a server, except in the case of an OSCServer object that has been configured with `'waitForConnectMessage'` (see below).
+
+
+MORE COMING SOON 
+
+
