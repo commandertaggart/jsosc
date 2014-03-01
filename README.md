@@ -3,6 +3,21 @@ jsosc
 
 A javascript OSC client and server implementation for Node.js and WebSocket-capable browsers.
 
+Installation
+------------
+jsosc is not yet available in the npm registry.  You can clone it directly from github into your node_modules directory (or wherever you want it to be for a browser-based project), or add it as a dependency in your package.json file, followed by `npm install`:
+```
+{
+    ...
+    "dependencies": {
+        ...
+        "jsosc": "glikker/jsosc",
+        ...
+    },
+    ...
+}
+```
+
 NodeJS
 ------
 Use jsosc in NodeJS by calling `require('jsosc')`.  The resulting jsosc object includes the three core classes:
