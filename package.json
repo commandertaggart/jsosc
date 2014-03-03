@@ -12,7 +12,5 @@
 
 	"dependencies":
 		{ "ws": "glikker/ws"
-		, "requirejs": "2.1.x"
-		, "buster": "0.7.x"
 		}
 }
