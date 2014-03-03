@@ -4,9 +4,12 @@
 
 		var gui = require('nw.gui');
 		gui.Window.get().showDevTools();
-		require('./main.js');
+		require('./node.js');
 		</script>
+		<script type="text/javascript" data-main="browser.js" src="require.js"></script>
 	</head>
 	<body>
+		<input id="message" type="text" value="/test" /><input id="send" type="submit" value="Send" /><br />
+		<div id="output" style="position: absolute; top: 40px; left: 0px; right: 0px; bottom: 0px; border: 1px solid black; white-space: pre; font-family: monospace; overflow: auto;"></div>
 	</body>
 </html>

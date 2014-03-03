@@ -9,7 +9,7 @@ var http = require('http');
 debugger;
 
 var webServer = http.createServer();
-webServer.listen(0, function ()
+webServer.listen(27614, function ()
 {
 	webServer.hostName = 'localhost';
 	webServer.port = webServer.address().port;
@@ -22,12 +22,12 @@ function serverReady()
 		connections: [
 			{ type: 'websocket'
 			, server: webServer
-			, path: "/oscServer"
+			, path: /^\/oscServer\/(.*)$/
 			}
 		]
 	});
 
-	var url = 'ws://localhost:' + webServer.port + "/oscServer";
+	var url = 'ws://localhost:' + webServer.port + "/oscServer/" + Math.floor(Math.random() * 0xffff).toString();
 	log(url);
 	var client = new OSCClient({
 		type: 'websocket',
@@ -35,9 +35,11 @@ function serverReady()
 	});
 
 
-	server.on('open', function onServerConnect()
+	server.on('open', function onServerConnect(from, matches)
 	{
 		log("server connect");
+		if (matches)
+			{ log(matches); }
 	});
 
 	server.on('message', function onServerMessage(message, from)

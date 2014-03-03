@@ -145,7 +145,7 @@ The configuration object provided to the OSCServer object includes these members
 * `connections` - an array of objects, one for each connection type.  These objects contain:
     * `type` - the connection type.  Currently only supports `'websocket'`.
     * `server` - for `'websocket'` type connections, a NodeJS http server object through which the client may reach this OSCServer.
-    * `path` - for `'websocket'` type connections, the URI resource path at which this server is reached.  Multiple OSC servers may exist on one web server.  If they use the same `path`, then they will share the same WebSocket connection.  Different `path` values will result in multiple socket connections.
+    * `path` - for `'websocket'` type connections, the URI resource path at which this server is reached.  Multiple OSC servers may exist on one web server.  If they use the same `path`, then they will share the same WebSocket connection.  Different `path` values will result in multiple socket connections.  This property may also be an object of class `RegExp`, to be tested against the path portion of the connection URL.  See the `connection` event below.
 * `waitForConnectMessage` - a boolean value, by default `false`.  If true, this server will not be notified of client connections until a `'/@connect'` message is received that matches the `namespace` property.  See the `sendConnectMessage` property of the OSCClient config object.
 * `namespace` - An OSC address path prefix that this server cares about.  If specified, no message will be received by this server unless the message `address` property begins with the `namespace` value.  This allows multiple OSCServer objects to use the same connection, but handle different sets of messages based on address namespace.  This value defaults to '/', which matches all well-formed messages.
 
@@ -154,13 +154,16 @@ The configuration object provided to the OSCServer object includes these members
 
 `sendMessage(message, to)` sends the provided OSCMessage object to the list of clients provided.  The `to` parameter is an array of client references as provided by the `connection` or `message` events (below), or may be excluded, to send the message to all connected clients.
 
-OSCServer is an object of type `EventEmitter`, for handling events.
+OSCServer is an object of type `EventEmitter`.  Events are registered using `on(event, handler)`.
 
 #### Events
-* `connection` - triggered when a client connects to this server. Parameters: a client reference to the new client.
+* `connection` - triggered when a client connects to this server. Parameters: a client reference to the new client.  If the `path` configuration property for this client's WebSocket connection is a RegExp, a second parameter is provided, which is the result array from matching that RegExp to the path portion of the incoming request's URL.
 * `disconnect` - triggered when a client connection is closed by either side. Parameters: a reference to the closed client.
 * `message` - triggered when a message is received from a client. Parameters: the message recieved, and a client reference to the sender.
 * `error` - triggered when an error occurs. Parameters: the error that occured, and a client reference to the client involved (if applicable).
+
+### Client References
+The object provided as the first parameter to all event handlers for OSCServer is a client reference.  It can be used as a parameter to `OSCServer.sendMessage()` to send a message to a specific client or list of clients.  For convenience, this reference has two methods: `close()` to close the connection, and `sendMessage(message)` to send a message directly to this client.
 
 ### Testing
 jsosc includes some unit tests written for use with [BusterJS](http://busterjs.org), and files for running some interactive tests in a [node-webkit](https://github.com/rogerwang/node-webkit) environment.  These setups are in no way complete, comprehensive or well-built.  Testing is one of my weak points.  I accept pointers, suggestions, criticism and well-thought-out complaints.  Thank you for your time and I hope this library is of use.
