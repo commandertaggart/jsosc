@@ -5,7 +5,7 @@
 	"homepage": "http://abject-entertainment.com/projects/jsosc",
 	"author": "info@abject-entertainment.com",
 
-	"main": "jsosc",
+	"main": "./lib/jsosc",
 	"modules":
 		{ "jsosc": "lib/jsosc"
 		},
